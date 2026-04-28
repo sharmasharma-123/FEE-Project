@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up — IndiaPolity</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page-body">
+
+  <nav>
+    <a class="nav-logo" href="index.html">🗳 IndiaPolity</a>
+    <div class="nav-right">
+      <button id="menuToggle">☰ Menu</button>
+      <ul class="nav-links" id="navList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bjp.html">BJP</a></li>
+        <li><a href="congress.html">Congress</a></li>
+        <li><a href="aap.html">AAP</a></li>
+        <li><a href="tmc.html">TMC</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-auth-btns" id="navAuthBtns"></div>
+      <button id="darkToggle">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+
+      <div class="auth-logo">🗳</div>
+      <h2>Create Account</h2>
+      <p class="auth-subtitle">Join IndiaPolity to track parties &amp; save preferences</p>
+
+      <div class="auth-error-box"   id="signupError"></div>
+      <div class="auth-success-box" id="signupSuccess"></div>
+
+      <!-- Step indicator -->
+      <div id="stepIndicator" style="display:flex;justify-content:center;gap:8px;margin-bottom:22px;">
+        <div class="step-dot active" data-step="1" style="width:32px;height:6px;border-radius:4px;background:var(--orange);transition:all 0.3s;"></div>
+        <div class="step-dot"        data-step="2" style="width:32px;height:6px;border-radius:4px;background:var(--border);transition:all 0.3s;"></div>
+        <div class="step-dot"        data-step="3" style="width:32px;height:6px;border-radius:4px;background:var(--border);transition:all 0.3s;"></div>
+      </div>
+      <p id="stepLabel" style="text-align:center;font-size:0.78rem;color:var(--muted);margin-bottom:16px;">Step 1 of 3 — Basic Info</p>
+
+      <form class="auth-form" id="signupForm" novalidate>
+
+        <!-- STEP 1: Basic Info -->
+        <div id="step1">
+          <label for="signupName">Full Name *</label>
+          <div class="input-group">
+            <span class="field-icon">👤</span>
+            <input type="text" id="signupName" placeholder="e.g. Ravi Kumar" maxlength="60" autocomplete="name" />
+          </div>
+          <p class="field-hint" id="nameHint"></p>
+
+          <label for="signupEmail">Email Address *</label>
+          <div class="input-group">
+            <span class="field-icon">📧</span>
+            <input type="email" id="signupEmail" placeholder="e.g. ravi@gmail.com" autocomplete="email" />
+          </div>
+          <p class="field-hint" id="emailHint"></p>
+
+          <label for="signupPhone">Phone Number (optional)</label>
+          <div class="input-group">
+            <span class="field-icon">📱</span>
+            <input type="tel" id="signupPhone" placeholder="+91 98765 43210" maxlength="15" autocomplete="tel" style="padding-left:38px;" />
+          </div>
+
+          <button type="button" class="auth-submit-btn" id="nextStep1">Next →</button>
+        </div>
+
+        <!-- STEP 2: Password -->
+        <div id="step2" style="display:none;">
+          <label for="signupPassword">Create Password *</label>
+          <div class="input-group">
+            <span class="field-icon">🔒</span>
+            <input type="password" id="signupPassword" placeholder="Min. 8 characters" autocomplete="new-password" />
+            <button type="button" class="eye-toggle" id="togglePwd1">👁</button>
+          </div>
+          <div class="password-strength">
+            <div class="password-strength-bar" id="pwdStrengthBar"></div>
+          </div>
+          <p class="strength-label" id="pwdStrengthLabel">Enter a password</p>
+          <p class="field-hint" id="pwdHint"></p>
+
+          <label for="signupConfirm">Confirm Password *</label>
+          <div class="input-group">
+            <span class="field-icon">🔒</span>
+            <input type="password" id="signupConfirm" placeholder="Repeat your password" autocomplete="new-password" />
+            <button type="button" class="eye-toggle" id="togglePwd2">👁</button>
+          </div>
+          <p class="field-hint" id="confirmHint"></p>
+
+          <div style="display:flex;gap:10px;margin-top:22px;">
+            <button type="button" class="btn-outline" id="backStep1" style="flex:1;padding:11px;">← Back</button>
+            <button type="button" class="auth-submit-btn" id="nextStep2" style="flex:2;">Next →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Preferences -->
+        <div id="step3" style="display:none;">
+          <p style="font-size:0.88rem;color:var(--muted);margin-bottom:14px;">Almost done! Tell us a bit about you.</p>
+
+          <label for="signupState">Your State (optional)</label>
+          <div class="input-group">
+            <span class="field-icon">📍</span>
+            <select id="signupState" style="padding-left:38px;">
+              <option value="">-- Select your state --</option>
+            </select>
+          </div>
+
+          <label for="signupAge">Age Group (optional)</label>
+          <div class="input-group">
+            <span class="field-icon">🎂</span>
+            <select id="signupAge" style="padding-left:38px;">
+              <option value="">-- Select age group --</option>
+              <option value="18-25">18 – 25</option>
+              <option value="26-35">26 – 35</option>
+              <option value="36-50">36 – 50</option>
+              <option value="51+">51+</option>
+            </select>
+          </div>
+
+          <label>Interested in (optional)</label>
+          <div id="interestCheckboxes" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;"></div>
+
+          <div class="checkbox-row" style="margin-top:18px;">
+            <input type="checkbox" id="agreeTerms" />
+            <label for="agreeTerms">I agree to the <a href="#" style="color:var(--orange-dk);">Terms</a> &amp; <a href="#" style="color:var(--orange-dk);">Privacy Policy</a> *</label>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="subscribeNews" checked />
+            <label for="subscribeNews">Send me political updates via email</label>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:22px;">
+            <button type="button" class="btn-outline" id="backStep2" style="flex:1;padding:11px;">← Back</button>
+            <button type="submit" class="auth-submit-btn" id="signupBtn" style="flex:2;">Create Account 🎉</button>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="auth-switch" style="margin-top:18px;">
+        Already have an account? <a href="login.html">Sign in →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© <span id="footerYear"></span> IndiaPolity · For educational purposes only</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  (function () {
+
+    /* ── If already logged in ── */
+    try {
+      var existing = JSON.parse(localStorage.getItem("indiapolity-user") || "null");
+      if (existing && existing.email) { window.location.href = "index.html"; return; }
+    } catch(e) {}
+
+    /* ── Populate states dropdown via DOM loop ── */
+    var states = [
+      "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh",
+      "Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka",
+      "Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram",
+      "Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana",
+      "Tripura","Uttar Pradesh","Uttarakhand","West Bengal",
+      "Delhi (NCT)","Jammu & Kashmir","Ladakh","Puducherry"
+    ];
+    var stateSelect = document.getElementById("signupState");
+    for (var si = 0; si < states.length; si++) {
+      var opt = document.createElement("option");
+      opt.value = states[si]; opt.textContent = states[si];
+      stateSelect.appendChild(opt);
+    }
+
+    /* ── Populate interest checkboxes via DOM loop ── */
+    var interests = ["BJP","Congress","AAP","TMC","Elections","Policy","Economy","Foreign Policy"];
+    var interestBox = document.getElementById("interestCheckboxes");
+    for (var ii = 0; ii < interests.length; ii++) {
+      (function(val) {
+        var label = document.createElement("label");
+        label.style.cssText =
+          "display:flex;align-items:center;gap:5px;padding:5px 12px;" +
+          "border:1.5px solid var(--border);border-radius:20px;font-size:0.8rem;" +
+          "cursor:pointer;transition:all 0.2s;color:var(--text);background:var(--card-bg);";
+        var cb = document.createElement("input");
+        cb.type = "checkbox"; cb.value = val;
+        cb.style.accentColor = "var(--orange)";
+        cb.addEventListener("change", function () {
+          label.style.background     = this.checked ? "var(--orange)"    : "var(--card-bg)";
+          label.style.color          = this.checked ? "#fff"             : "var(--text)";
+          label.style.borderColor    = this.checked ? "var(--orange)"    : "var(--border)";
+        });
+        label.appendChild(cb);
+        label.appendChild(document.createTextNode(val));
+        interestBox.appendChild(label);
+      })(interests[ii]);
+    }
+
+    /* ── Step navigation ── */
+    var currentStep = 1;
+
+    function goToStep(n) {
+      document.getElementById("step" + currentStep).style.display = "none";
+      currentStep = n;
+      document.getElementById("step" + currentStep).style.display = "block";
+      /* Update dots */
+      var dots = document.querySelectorAll(".step-dot");
+      for (var di = 0; di < dots.length; di++) {
+        dots[di].style.background = (di + 1) <= currentStep ? "var(--orange)" : "var(--border)";
+        dots[di].style.width      = (di + 1) === currentStep ? "44px" : "32px";
+      }
+      var labels = ["", "Step 1 of 3 — Basic Info", "Step 2 of 3 — Set Password", "Step 3 of 3 — Preferences"];
+      document.getElementById("stepLabel").textContent = labels[currentStep];
+      hideMessages();
+    }
+
+    document.getElementById("nextStep1").addEventListener("click", function () {
+      var name  = document.getElementById("signupName").value.trim();
+      var email = document.getElementById("signupEmail").value.trim();
+      hideMessages();
+      if (!name || name.length < 2)  { showError("Please enter your full name (at least 2 characters)."); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("Please enter a valid email address."); return; }
+      /* Check for duplicate email */
+      var users = JSON.parse(localStorage.getItem("indiapolity-users") || "[]");
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].email.toLowerCase() === email.toLowerCase()) {
+          showError("An account with this email already exists. <a href='login.html' style='color:var(--orange-dk)'>Sign in instead →</a>");
+          return;
+        }
+      }
+      goToStep(2);
+    });
+
+    document.getElementById("backStep1").addEventListener("click", function () { goToStep(1); });
+    document.getElementById("backStep2").addEventListener("click", function () { goToStep(2); });
+
+    document.getElementById("nextStep2").addEventListener("click", function () {
+      var pwd     = document.getElementById("signupPassword").value;
+      var confirm = document.getElementById("signupConfirm").value;
+      hideMessages();
+      if (!pwd || pwd.length < 8)    { showError("Password must be at least 8 characters."); return; }
+      if (pwd !== confirm)           { showError("Passwords do not match. Please try again."); return; }
+      goToStep(3);
+    });
+
+    /* ── Password strength meter ── */
+    document.getElementById("signupPassword").addEventListener("input", function () {
+      var pwd   = this.value;
+      var score = 0;
+      var bar   = document.getElementById("pwdStrengthBar");
+      var label = document.getElementById("pwdStrengthLabel");
+      var hint  = document.getElementById("pwdHint");
+
+      if (pwd.length >= 8)           score++;
+      if (/[A-Z]/.test(pwd))         score++;
+      if (/[0-9]/.test(pwd))         score++;
+      if (/[^A-Za-z0-9]/.test(pwd))  score++;
+
+      var levels = [
+        { w:"0%",   bg:"#e53935", text:"Too short" },
+        { w:"25%",  bg:"#e53935", text:"Weak" },
+        { w:"50%",  bg:"#fb8c00", text:"Fair" },
+        { w:"75%",  bg:"#fdd835", text:"Good" },
+        { w:"100%", bg:"#43a047", text:"Strong 💪" }
+      ];
+      bar.style.width      = levels[score].w;
+      bar.style.background = levels[score].bg;
+      label.textContent    = levels[score].text;
+
+      hint.textContent = pwd.length < 8 ? "✗ At least 8 characters" : "✓ Length OK";
+      hint.className   = "field-hint " + (pwd.length >= 8 ? "hint-ok" : "hint-err");
+    });
+
+    /* ── Confirm password match ── */
+    document.getElementById("signupConfirm").addEventListener("input", function () {
+      var pwd     = document.getElementById("signupPassword").value;
+      var hint    = document.getElementById("confirmHint");
+      if (!this.value) { hint.textContent = ""; return; }
+      var match   = this.value === pwd;
+      hint.textContent = match ? "✓ Passwords match" : "✗ Passwords do not match";
+      hint.className   = "field-hint " + (match ? "hint-ok" : "hint-err");
+    });
+
+    /* ── Toggle passwords ── */
+    document.getElementById("togglePwd1").addEventListener("click", function () {
+      var f = document.getElementById("signupPassword");
+      f.type = f.type === "password" ? "text" : "password";
+      this.textContent = f.type === "password" ? "👁" : "🙈";
+    });
+    document.getElementById("togglePwd2").addEventListener("click", function () {
+      var f = document.getElementById("signupConfirm");
+      f.type = f.type === "password" ? "text" : "password";
+      this.textContent = f.type === "password" ? "👁" : "🙈";
+    });
+
+    /* ── Live name feedback ── */
+    document.getElementById("signupName").addEventListener("input", function () {
+      var hint = document.getElementById("nameHint");
+      var val  = this.value.trim();
+      if (!val) { hint.textContent = ""; return; }
+      if (val.length < 2) { hint.textContent = "✗ Too short"; hint.className = "field-hint hint-err"; return; }
+      hint.textContent = "✓ Hello, " + val.split(" ")[0] + "! 👋";
+      hint.className   = "field-hint hint-ok";
+    });
+
+    /* ── Live email feedback ── */
+    document.getElementById("signupEmail").addEventListener("input", function () {
+      var hint  = document.getElementById("emailHint");
+      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value.trim());
+      if (!this.value) { hint.textContent = ""; return; }
+      hint.textContent = valid ? "✓ Valid email" : "✗ Invalid email";
+      hint.className   = "field-hint " + (valid ? "hint-ok" : "hint-err");
+    });
+
+    /* ── Final submit ── */
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      hideMessages();
+
+      if (!document.getElementById("agreeTerms").checked) {
+        showError("Please agree to the Terms & Privacy Policy to continue.");
+        return;
+      }
+
+      /* Collect interest checkboxes */
+      var interestCbs = interestBox.querySelectorAll("input[type=checkbox]:checked");
+      var interests   = [];
+      for (var i = 0; i < interestCbs.length; i++) interests.push(interestCbs[i].value);
+
+      var newUser = {
+        name:      document.getElementById("signupName").value.trim(),
+        email:     document.getElementById("signupEmail").value.trim(),
+        phone:     document.getElementById("signupPhone").value.trim(),
+        password:  document.getElementById("signupPassword").value,
+        state:     document.getElementById("signupState").value,
+        age:       document.getElementById("signupAge").value,
+        interests: interests,
+        subscribed: document.getElementById("subscribeNews").checked,
+        joinDate:  new Date().toLocaleDateString("en-IN", { day:"numeric", month:"short", year:"numeric" })
+      };
+
+      var signupBtn = document.getElementById("signupBtn");
+      signupBtn.textContent = "Creating account…"; signupBtn.disabled = true;
+
+      setTimeout(function () {
+        /* Save user to users array */
+        var users = JSON.parse(localStorage.getItem("indiapolity-users") || "[]");
+        users.push(newUser);
+        localStorage.setItem("indiapolity-users", JSON.stringify(users));
+
+        /* Auto login */
+        var session = { email: newUser.email, name: newUser.name, avatar: newUser.name.charAt(0).toUpperCase(), loginTime: Date.now() };
+        localStorage.setItem("indiapolity-user", JSON.stringify(session));
+
+        /* Prefill email for login page if needed */
+        sessionStorage.setItem("indiapolity-prefill-email", newUser.email);
+
+        showSuccess("🎉 Account created! Welcome, " + newUser.name + "! Redirecting…");
+        setTimeout(function () { window.location.href = "index.html"; }, 1300);
+      }, 900);
+    });
+
+    /* ── Helpers ── */
+    function showError(msg)   { var el = document.getElementById("signupError"); el.innerHTML = "⚠ " + msg; el.style.display = "block"; }
+    function showSuccess(msg) { var el = document.getElementById("signupSuccess"); el.textContent = msg; el.style.display = "block"; }
+    function hideMessages()   {
+      document.getElementById("signupError").style.display   = "none";
+      document.getElementById("signupSuccess").style.display = "none";
+    }
+
+  })();
+  </script>
+</body>
+</html>

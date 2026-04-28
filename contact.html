@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — IndiaPolity</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">🗳 IndiaPolity</a>
+    <div class="nav-right">
+      <button id="menuToggle">☰ Menu</button>
+      <ul class="nav-links" id="navList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bjp.html">BJP</a></li>
+        <li><a href="congress.html">Congress</a></li>
+        <li><a href="aap.html">AAP</a></li>
+        <li><a href="tmc.html">TMC</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-auth-btns" id="navAuthBtns"></div>
+      <button id="darkToggle">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="hero" style="padding:40px 20px 28px;">
+    <h1>Contact Us</h1>
+    <p>Have a suggestion, correction, or feedback about IndiaPolity? We'd love to hear from you.</p>
+  </div>
+
+  <!-- Two-column grid -->
+  <div class="contact-grid">
+
+    <!-- LEFT: Form -->
+    <div class="contact-form-box">
+      <h2 style="font-size:1.35rem;color:var(--orange-xd);margin-bottom:6px;">Send a Message</h2>
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:20px;">
+        This form is for website feedback only. We are not affiliated with any political party.
+      </p>
+
+      <!-- Success / Error Messages -->
+      <div id="successMsg" style="display:none;background:#e8f5e9;border:1px solid #a5d6a7;padding:12px 18px;border-radius:8px;color:#2e7d32;font-size:0.9rem;margin-bottom:18px;">
+        ✅ Thank you! Your message was received successfully.
+      </div>
+
+      <!-- Rate the site -->
+      <div style="margin-bottom:20px;">
+        <p style="font-size:0.88rem;color:var(--muted);margin-bottom:6px;">Rate this website:</p>
+        <div class="feedback-stars" id="starRating">
+          <button class="star-btn" data-val="1">★</button>
+          <button class="star-btn" data-val="2">★</button>
+          <button class="star-btn" data-val="3">★</button>
+          <button class="star-btn" data-val="4">★</button>
+          <button class="star-btn" data-val="5">★</button>
+        </div>
+        <p id="starLabel" style="font-size:0.78rem;color:var(--muted);min-height:18px;"></p>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+
+        <label for="userName">Your Name *</label>
+        <div class="input-with-icon">
+          <span class="input-icon">👤</span>
+          <input type="text" id="userName" placeholder="e.g. Ravi Kumar" maxlength="60" />
+        </div>
+        <p id="nameHint" style="font-size:0.74rem;color:var(--muted);margin-top:3px;min-height:16px;"></p>
+
+        <label for="userEmail">Email Address *</label>
+        <div class="input-with-icon">
+          <span class="input-icon">📧</span>
+          <input type="email" id="userEmail" placeholder="e.g. ravi@gmail.com" />
+        </div>
+        <p id="emailHint" style="font-size:0.74rem;color:var(--muted);margin-top:3px;min-height:16px;"></p>
+
+        <label for="userPhone">Phone Number (optional)</label>
+        <div class="input-with-icon">
+          <span class="input-icon">📱</span>
+          <input type="tel" id="userPhone" placeholder="e.g. +91 98765 43210" maxlength="15" />
+        </div>
+
+        <label for="msgType">Type of Feedback *</label>
+        <select id="msgType">
+          <option value="">-- Select type --</option>
+          <option value="suggestion">💡 Suggestion</option>
+          <option value="correction">✏ Correction / Error Report</option>
+          <option value="question">❓ Question</option>
+          <option value="compliment">🌟 Compliment</option>
+          <option value="other">📩 Other</option>
+        </select>
+
+        <label for="partySelect">Related to Party (optional)</label>
+        <select id="partySelect">
+          <option value="">-- Select a party --</option>
+          <option value="bjp">BJP</option>
+          <option value="congress">Congress</option>
+          <option value="aap">AAP</option>
+          <option value="tmc">TMC</option>
+          <option value="general">General / All</option>
+        </select>
+
+        <label for="userMsg">Your Message * <span id="charCount" style="float:right;font-size:0.74rem;color:var(--muted);">500 left</span></label>
+        <textarea id="userMsg" placeholder="Write your feedback or suggestion here…"></textarea>
+
+        <!-- Live preview -->
+        <div id="msgPreview" style="display:none;margin-top:8px;padding:10px 14px;background:var(--light);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;color:var(--muted);line-height:1.6;"></div>
+
+        <div style="display:flex;align-items:center;gap:10px;margin-top:6px;">
+          <input type="checkbox" id="previewToggle" style="width:auto;accent-color:var(--orange);" />
+          <label for="previewToggle" style="font-size:0.82rem;color:var(--muted);margin:0;cursor:pointer;">Show live message preview</label>
+        </div>
+
+        <button type="submit" id="submitBtn">Submit Feedback</button>
+        <button type="button" id="resetBtn" class="btn-outline" style="margin-top:10px;width:auto;padding:9px 22px;">↺ Reset Form</button>
+      </form>
+
+      <!-- Previous submissions (localStorage) -->
+      <div style="margin-top:30px;border-top:1px solid var(--border);padding-top:20px;">
+        <h3 style="font-size:1rem;color:var(--orange-dk);margin-bottom:10px;">📋 Your Previous Submissions</h3>
+        <div id="submissionHistory" style="font-size:0.83rem;color:var(--muted);"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Info + FAQ -->
+    <div class="contact-info-box">
+
+      <div class="contact-info-card">
+        <h3>📌 About IndiaPolity</h3>
+        <p>IndiaPolity is a student educational project covering BJP, Congress, AAP, and TMC. All content is for informational purposes only. We have no political affiliation.</p>
+      </div>
+
+      <div class="contact-info-card">
+        <h3>📊 Website Stats</h3>
+        <div id="siteStatsBox"></div>
+      </div>
+
+      <div class="contact-info-card">
+        <h3>🔗 Quick Links</h3>
+        <ul id="quickLinksList"></ul>
+      </div>
+
+      <div class="contact-info-card">
+        <h3>❓ FAQ</h3>
+        <div id="faqContainer"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Chatbot -->
+  <button id="chatToggle" title="Ask about Indian Politics">🤖</button>
+  <div id="chatBox">
+    <div class="chat-header">🇮🇳 IndiaPolity Assistant</div>
+    <div id="chatMessages"></div>
+    <div class="chat-footer">
+      <input id="chatInput" type="text" placeholder="Ask about parties…" />
+      <button id="chatSend">Send</button>
+    </div>
+  </div>
+
+  <button id="topBtn">↑</button>
+
+  <footer>
+    <p>© <span id="footerYear"></span> IndiaPolity · For educational purposes only</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  (function () {
+
+    /* ── STAR RATING ── */
+    var starLabels = ["", "Poor", "Fair", "Good", "Very Good", "Excellent! 🎉"];
+    var starBtns   = document.querySelectorAll(".star-btn");
+    var starLabel  = document.getElementById("starLabel");
+    var selectedStar = 0;
+
+    function updateStars(val) {
+      for (var i = 0; i < starBtns.length; i++) {
+        starBtns[i].classList.toggle("lit", i < val);
+      }
+    }
+
+    for (var si = 0; si < starBtns.length; si++) {
+      (function (btn, val) {
+        btn.addEventListener("mouseenter", function () { updateStars(val); });
+        btn.addEventListener("mouseleave", function () { updateStars(selectedStar); });
+        btn.addEventListener("click", function () {
+          selectedStar = val;
+          updateStars(val);
+          starLabel.textContent = starLabels[val];
+          localStorage.setItem("indiapolity-rating", val);
+          window.IndiaPolityToast && window.IndiaPolityToast.show("Thanks for your " + starLabels[val] + " rating!", "success", 2500);
+        });
+      })(starBtns[si], parseInt(starBtns[si].getAttribute("data-val")));
+    }
+
+    /* Restore saved rating */
+    var savedRating = parseInt(localStorage.getItem("indiapolity-rating") || "0");
+    if (savedRating) { selectedStar = savedRating; updateStars(savedRating); starLabel.textContent = starLabels[savedRating]; }
+
+    /* ── LIVE NAME HINT ── */
+    document.getElementById("userName").addEventListener("input", function () {
+      var hint = document.getElementById("nameHint");
+      var val  = this.value.trim();
+      if (val.length === 0) { hint.textContent = ""; return; }
+      if (val.length < 2)   { hint.style.color = "#e53935"; hint.textContent = "Name too short."; return; }
+      hint.style.color = "#43a047";
+      hint.textContent = "Hi, " + val.split(" ")[0] + "! 👋";
+    });
+
+    /* ── LIVE EMAIL VALIDATION ── */
+    document.getElementById("userEmail").addEventListener("input", function () {
+      var hint  = document.getElementById("emailHint");
+      var email = this.value.trim();
+      if (!email) { hint.textContent = ""; return; }
+      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      hint.style.color   = valid ? "#43a047" : "#e53935";
+      hint.textContent   = valid ? "✓ Valid email address" : "✗ Invalid email format";
+    });
+
+    /* ── LIVE PREVIEW ── */
+    var previewToggle = document.getElementById("previewToggle");
+    var msgPreview    = document.getElementById("msgPreview");
+    var userMsg       = document.getElementById("userMsg");
+
+    previewToggle.addEventListener("change", function () {
+      msgPreview.style.display = this.checked ? "block" : "none";
+    });
+
+    userMsg.addEventListener("input", function () {
+      if (previewToggle.checked) {
+        msgPreview.textContent = this.value || "(Your message will appear here…)";
+      }
+    });
+
+    /* ── RESET BUTTON ── */
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      document.getElementById("contactForm").reset();
+      document.getElementById("nameHint").textContent  = "";
+      document.getElementById("emailHint").textContent = "";
+      document.getElementById("charCount").textContent = "500 left";
+      document.getElementById("charCount").style.color = "var(--muted)";
+      msgPreview.style.display = "none";
+      previewToggle.checked = false;
+      window.IndiaPolityToast && window.IndiaPolityToast.show("Form has been reset.", "info", 2000);
+    });
+
+    /* ── SUBMISSION HISTORY (localStorage) ── */
+    var historyKey = "indiapolity-submissions";
+
+    function loadHistory() {
+      var box  = document.getElementById("submissionHistory");
+      var data = JSON.parse(localStorage.getItem(historyKey) || "[]");
+      if (data.length === 0) {
+        box.textContent = "No previous submissions found.";
+        return;
+      }
+      box.innerHTML = "";
+      for (var i = data.length - 1; i >= 0; i--) {
+        var item = data[i];
+        var div  = document.createElement("div");
+        div.style.cssText = "padding:8px 12px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;background:var(--light);";
+        div.innerHTML =
+          '<strong style="color:var(--orange-dk);">' + item.name + '</strong> &nbsp;' +
+          '<span style="font-size:0.72rem;color:#aaa;">' + item.date + '</span><br>' +
+          '<span style="color:var(--muted);">' + item.type + '</span> — ' +
+          item.msg.substring(0, 60) + (item.msg.length > 60 ? "…" : "");
+        box.appendChild(div);
+      }
+      /* Add clear button */
+      var clearBtn = document.createElement("button");
+      clearBtn.textContent = "🗑 Clear History";
+      clearBtn.className = "btn-outline";
+      clearBtn.style.cssText = "margin-top:8px;font-size:0.78rem;padding:5px 14px;";
+      clearBtn.addEventListener("click", function () {
+        localStorage.removeItem(historyKey);
+        box.innerHTML = "No previous submissions found.";
+        clearBtn.remove();
+        window.IndiaPolityToast && window.IndiaPolityToast.show("Submission history cleared.", "info", 2000);
+      });
+      box.appendChild(clearBtn);
+    }
+
+    loadHistory();
+
+    /* Save submission on success */
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name    = document.getElementById("userName").value.trim();
+      var email   = document.getElementById("userEmail").value.trim();
+      var msg     = document.getElementById("userMsg").value.trim();
+      var type    = document.getElementById("msgType").value;
+      var submitBtn = document.getElementById("submitBtn");
+
+      var errEl = document.getElementById("formError");
+      if (!errEl) {
+        errEl = document.createElement("div");
+        errEl.id = "formError";
+        errEl.style.cssText = "background:#fdecea;border:1px solid #f44336;padding:10px 16px;border-radius:8px;color:#b71c1c;font-size:0.88rem;margin-bottom:14px;display:none;";
+        this.insertBefore(errEl, this.firstChild);
+      }
+
+      if (!name)  { errEl.textContent = "⚠ Please enter your name."; errEl.style.display = "block"; return; }
+      if (!email) { errEl.textContent = "⚠ Please enter your email."; errEl.style.display = "block"; return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = "⚠ Invalid email address."; errEl.style.display = "block"; return; }
+      if (!type)  { errEl.textContent = "⚠ Please select a feedback type."; errEl.style.display = "block"; return; }
+      if (!msg)   { errEl.textContent = "⚠ Please enter your message."; errEl.style.display = "block"; return; }
+      errEl.style.display = "none";
+
+      submitBtn.textContent = "Sending…";
+      submitBtn.disabled    = true;
+
+      setTimeout(function () {
+        /* Save to history */
+        var history = JSON.parse(localStorage.getItem(historyKey) || "[]");
+        history.push({
+          name: name,
+          email: email,
+          type: type || "General",
+          msg:  msg,
+          date: new Date().toLocaleDateString("en-IN", { day:"numeric", month:"short", year:"numeric" })
+        });
+        localStorage.setItem(historyKey, JSON.stringify(history));
+
+        document.getElementById("successMsg").style.display = "block";
+        document.getElementById("successMsg").scrollIntoView({ behavior: "smooth" });
+        document.getElementById("contactForm").reset();
+        document.getElementById("nameHint").textContent  = "";
+        document.getElementById("emailHint").textContent = "";
+        submitBtn.textContent = "Submit Feedback";
+        submitBtn.disabled    = false;
+        loadHistory();
+        window.IndiaPolityToast && window.IndiaPolityToast.show("Message sent! Thank you 🎉", "success", 3000);
+      }, 900);
+    });
+
+    /* ── SITE STATS BOX (from localStorage) ── */
+    (function () {
+      var visits = JSON.parse(localStorage.getItem("indiapolity-visits") || "{}");
+      var pages  = ["index.html","bjp.html","congress.html","aap.html","tmc.html","compare.html","news.html","contact.html"];
+      var labels = ["Home","BJP","Congress","AAP","TMC","Compare","News","Contact"];
+      var box    = document.getElementById("siteStatsBox");
+      var total  = 0;
+      for (var pi = 0; pi < pages.length; pi++) total += (visits[pages[pi]] || 0);
+
+      var html = '<p style="font-size:0.82rem;color:var(--muted);margin-bottom:8px;">Total page views this session: <strong style="color:var(--orange-dk);">' + total + '</strong></p>';
+      for (var i = 0; i < pages.length; i++) {
+        var v = visits[pages[i]] || 0;
+        if (!v) continue;
+        html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:0.8rem;">' +
+          '<span style="width:72px;color:var(--text);">' + labels[i] + '</span>' +
+          '<div style="flex:1;height:7px;background:var(--border);border-radius:10px;overflow:hidden;">' +
+          '<div style="width:' + Math.min(100, v * 20) + '%;height:100%;background:var(--orange);border-radius:10px;"></div></div>' +
+          '<span style="color:var(--muted);">' + v + 'x</span></div>';
+      }
+      if (total === 0) html = '<p style="font-size:0.82rem;color:var(--muted);">No visit data yet. Browse around!</p>';
+      box.innerHTML = html;
+    })();
+
+    /* ── QUICK LINKS (DOM loop) ── */
+    (function () {
+      var links = [
+        { href: "bjp.html",      label: "🏛 BJP Profile" },
+        { href: "congress.html", label: "🏛 Congress Profile" },
+        { href: "aap.html",      label: "🏛 AAP Profile" },
+        { href: "tmc.html",      label: "🏛 TMC Profile" },
+        { href: "compare.html",  label: "📊 Compare Parties" },
+        { href: "news.html",     label: "📰 Latest News" }
+      ];
+      var ul = document.getElementById("quickLinksList");
+      for (var li = 0; li < links.length; li++) {
+        var item = document.createElement("li");
+        item.style.cssText = "margin-bottom:6px;font-size:0.85rem;";
+        var a = document.createElement("a");
+        a.href = links[li].href;
+        a.textContent = links[li].label;
+        a.style.cssText = "color:var(--orange-dk);text-decoration:none;";
+        a.addEventListener("mouseover", function () { this.style.textDecoration = "underline"; });
+        a.addEventListener("mouseout",  function () { this.style.textDecoration = "none"; });
+        item.appendChild(a);
+        ul.appendChild(item);
+      }
+    })();
+
+    /* ── FAQ ACCORDION (DOM-built) ── */
+    (function () {
+      var faqs = [
+        { q: "Is this website affiliated with any party?", a: "No. IndiaPolity is a student educational project with no political affiliation of any kind." },
+        { q: "How is information sourced?", a: "All information is sourced from publicly available data including official party websites, Wikipedia, and news sources." },
+        { q: "Can I suggest a correction?", a: "Yes! Use the feedback form on this page and select 'Correction / Error Report'. We review all submissions." },
+        { q: "Does the chatbot give biased answers?", a: "The AI assistant is designed to be strictly neutral and factual. It covers only Indian political parties and does not take political sides." },
+        { q: "How do I use keyboard shortcuts?", a: "Press the '?' key anywhere on the site to see all available keyboard shortcuts for quick navigation." }
+      ];
+
+      var container = document.getElementById("faqContainer");
+      for (var fi = 0; fi < faqs.length; fi++) {
+        (function (faq) {
+          var wrapper = document.createElement("div");
+          wrapper.className = "faq-item";
+
+          var question = document.createElement("div");
+          question.className = "faq-question";
+          question.innerHTML = '<span>' + faq.q + '</span><span class="faq-arrow">▼</span>';
+
+          var answer = document.createElement("div");
+          answer.className = "faq-answer";
+          answer.textContent = faq.a;
+
+          question.addEventListener("click", function () {
+            var isOpen = answer.classList.contains("open");
+            /* Close all */
+            container.querySelectorAll(".faq-answer").forEach(function (a) { a.classList.remove("open"); });
+            container.querySelectorAll(".faq-arrow").forEach(function (a) { a.classList.remove("rotated"); });
+            if (!isOpen) {
+              answer.classList.add("open");
+              question.querySelector(".faq-arrow").classList.add("rotated");
+            }
+          });
+
+          wrapper.appendChild(question);
+          wrapper.appendChild(answer);
+          container.appendChild(wrapper);
+        })(faqs[fi]);
+      }
+    })();
+
+  })();
+  </script>
+</body>
+</html>

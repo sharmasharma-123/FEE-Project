@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — IndiaPolity</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page-body">
+
+  <nav>
+    <a class="nav-logo" href="index.html">🗳 IndiaPolity</a>
+    <div class="nav-right">
+      <button id="menuToggle">☰ Menu</button>
+      <ul class="nav-links" id="navList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bjp.html">BJP</a></li>
+        <li><a href="congress.html">Congress</a></li>
+        <li><a href="aap.html">AAP</a></li>
+        <li><a href="tmc.html">TMC</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-auth-btns" id="navAuthBtns"></div>
+      <button id="darkToggle">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+
+      <div class="auth-logo">🗳</div>
+      <h2>Welcome Back</h2>
+      <p class="auth-subtitle">Sign in to your IndiaPolity account</p>
+
+      <div class="auth-error-box"   id="loginError"></div>
+      <div class="auth-success-box" id="loginSuccess"></div>
+
+      <form class="auth-form" id="loginForm" novalidate>
+
+        <label for="loginEmail">Email Address</label>
+        <div class="input-group">
+          <span class="field-icon">📧</span>
+          <input type="email" id="loginEmail" placeholder="Enter your email" autocomplete="email" />
+        </div>
+        <p class="field-hint" id="loginEmailHint"></p>
+
+        <label for="loginPassword">Password</label>
+        <div class="input-group">
+          <span class="field-icon">🔒</span>
+          <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" />
+          <button type="button" class="eye-toggle" id="toggleLoginPwd">👁</button>
+        </div>
+        <p class="field-hint" id="loginPwdHint"></p>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="rememberMe" />
+          <label for="rememberMe">Remember me on this device</label>
+        </div>
+
+        <button type="submit" class="auth-submit-btn" id="loginBtn">Sign In →</button>
+      </form>
+
+      <div style="text-align:right;margin-top:10px;">
+        <a href="#" id="forgotPwd" style="font-size:0.82rem;color:var(--orange-dk);text-decoration:none;">Forgot password?</a>
+      </div>
+
+      <div class="auth-divider">or continue with</div>
+
+      <button class="auth-social-btn" id="googleLoginBtn">
+        <span>🌐</span> Continue with Google (Demo)
+      </button>
+      <button class="auth-social-btn" id="githubLoginBtn">
+        <span>⚫</span> Continue with GitHub (Demo)
+      </button>
+
+      <div class="auth-switch">
+        Don't have an account? <a href="signup.html">Create one →</a>
+      </div>
+      <p class="auth-terms">
+        By signing in you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+      </p>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© <span id="footerYear"></span> IndiaPolity · For educational purposes only</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  (function () {
+
+    /* ── If already logged in, redirect home ── */
+    try {
+      var existing = JSON.parse(localStorage.getItem("indiapolity-user") || "null");
+      if (existing && existing.email) { window.location.href = "index.html"; return; }
+    } catch(e) {}
+
+    var loginForm    = document.getElementById("loginForm");
+    var loginError   = document.getElementById("loginError");
+    var loginSuccess = document.getElementById("loginSuccess");
+    var loginBtn     = document.getElementById("loginBtn");
+    var emailInput   = document.getElementById("loginEmail");
+    var pwdInput     = document.getElementById("loginPassword");
+
+    /* ── Prefill email if redirected from signup ── */
+    var prefill = sessionStorage.getItem("indiapolity-prefill-email");
+    if (prefill) { emailInput.value = prefill; sessionStorage.removeItem("indiapolity-prefill-email"); }
+
+    /* ── Live email validation ── */
+    emailInput.addEventListener("input", function () {
+      var hint  = document.getElementById("loginEmailHint");
+      var val   = this.value.trim();
+      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      if (!val) { hint.textContent = ""; emailInput.className = ""; return; }
+      hint.textContent = valid ? "✓ Valid email" : "✗ Invalid email format";
+      hint.className   = "field-hint " + (valid ? "hint-ok" : "hint-err");
+      emailInput.classList.toggle("valid-field",   valid);
+      emailInput.classList.toggle("invalid-field", !valid);
+    });
+
+    /* ── Live password hint ── */
+    pwdInput.addEventListener("input", function () {
+      var hint = document.getElementById("loginPwdHint");
+      var val  = this.value;
+      if (!val) { hint.textContent = ""; pwdInput.className = ""; return; }
+      var ok = val.length >= 6;
+      hint.textContent = ok ? "✓ Looks good" : "✗ At least 6 characters required";
+      hint.className   = "field-hint " + (ok ? "hint-ok" : "hint-err");
+      pwdInput.classList.toggle("valid-field",   ok);
+      pwdInput.classList.toggle("invalid-field", !ok);
+    });
+
+    /* ── Toggle password visibility ── */
+    document.getElementById("toggleLoginPwd").addEventListener("click", function () {
+      var hidden = pwdInput.type === "password";
+      pwdInput.type    = hidden ? "text" : "password";
+      this.textContent = hidden ? "🙈" : "👁";
+    });
+
+    /* ── Forgot password ── */
+    document.getElementById("forgotPwd").addEventListener("click", function (e) {
+      e.preventDefault();
+      var email = emailInput.value.trim();
+      if (!email) {
+        showError("Enter your email first, then click Forgot Password.");
+        emailInput.focus(); return;
+      }
+      showSuccess("📧 Reset link sent to " + email + " (Demo — no real email sent)");
+    });
+
+    /* ── Social logins (demo) ── */
+    document.getElementById("googleLoginBtn").addEventListener("click", function () {
+      doSocialLogin("google@demo.com", "Google User");
+    });
+    document.getElementById("githubLoginBtn").addEventListener("click", function () {
+      doSocialLogin("github@demo.com", "GitHub User");
+    });
+
+    function doSocialLogin(email, name) {
+      loginBtn.textContent = "Signing in…"; loginBtn.disabled = true;
+      setTimeout(function () {
+        saveSession({ email: email, name: name });
+        showSuccess("✅ Welcome, " + name + "! Redirecting…");
+        setTimeout(function () { window.location.href = getRedirect(); }, 1100);
+      }, 700);
+    }
+
+    /* ── Main submit ── */
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      hideMessages();
+
+      var email = emailInput.value.trim();
+      var pwd   = pwdInput.value;
+
+      /* Validate */
+      if (!email) { showError("Please enter your email address."); emailInput.focus(); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("Enter a valid email address."); emailInput.focus(); return; }
+      if (!pwd)   { showError("Please enter your password."); pwdInput.focus(); return; }
+      if (pwd.length < 6) { showError("Password must be at least 6 characters."); pwdInput.focus(); return; }
+
+      /* Look up user in localStorage */
+      var users = JSON.parse(localStorage.getItem("indiapolity-users") || "[]");
+      var match = null;
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].email.toLowerCase() === email.toLowerCase() && users[i].password === pwd) {
+          match = users[i]; break;
+        }
+      }
+
+      if (!match) {
+        showError("No account found with those credentials. Check your details or sign up.");
+        return;
+      }
+
+      loginBtn.textContent = "Signing in…"; loginBtn.disabled = true;
+
+      setTimeout(function () {
+        saveSession(match);
+        showSuccess("✅ Welcome back, " + match.name + "! Redirecting…");
+        setTimeout(function () { window.location.href = getRedirect(); }, 1100);
+      }, 800);
+    });
+
+    /* ── Helpers ── */
+    function saveSession(user) {
+      var session = {
+        email: user.email,
+        name:  user.name,
+        avatar: user.name.charAt(0).toUpperCase(),
+        loginTime: Date.now()
+      };
+      localStorage.setItem("indiapolity-user", JSON.stringify(session));
+    }
+
+    function getRedirect() {
+      var p = new URLSearchParams(window.location.search).get("redirect");
+      return p || "index.html";
+    }
+
+    function showError(msg)   { loginError.innerHTML = "⚠ " + msg; loginError.style.display = "block"; }
+    function showSuccess(msg) { loginSuccess.innerHTML = msg;       loginSuccess.style.display = "block"; }
+    function hideMessages()   { loginError.style.display = "none"; loginSuccess.style.display = "none"; }
+
+  })();
+  </script>
+</body>
+</html>

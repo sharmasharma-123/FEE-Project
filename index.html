@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IndiaPolity — Indian Political Parties</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="welcome-strip">
+    🇮🇳 Explore India's major political parties — BJP, INC, AAP, TMC
+  </div>
+
+  <nav>
+    <a class="nav-logo" href="index.html">🗳 IndiaPolity</a>
+    <div class="nav-right">
+      <button id="menuToggle">☰ Menu</button>
+      <ul class="nav-links" id="navList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bjp.html">BJP</a></li>
+        <li><a href="congress.html">Congress</a></li>
+        <li><a href="aap.html">AAP</a></li>
+        <li><a href="tmc.html">TMC</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-auth-btns" id="navAuthBtns"></div>
+      <button id="darkToggle">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Indian Political Parties</h1>
+    <p>A one-stop platform to explore party history, leadership, ideology, and more — clearly presented for every citizen.</p>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search a party or topic…" />
+      <select id="filterSelect">
+        <option value="all">All Ideologies</option>
+        <option value="right">Right Wing</option>
+        <option value="centrist">Centrist</option>
+        <option value="regional">Regional</option>
+      </select>
+      <button id="searchBtn">Search</button>
+    </div>
+  </div>
+
+  <!-- Stats Strip -->
+  <div class="stats-strip">
+    <div class="stat-box">
+      <span class="stat-count" data-target="4">0</span>
+      <span class="stat-label">Major Parties</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-count" data-target="543">0</span>
+      <span class="stat-label">Lok Sabha Seats</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-count" data-target="2500">0</span>
+      <span class="stat-label">Registered Parties</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-count" data-target="969">0</span>
+      <span class="stat-label">Million Voters (2024)</span>
+    </div>
+  </div>
+
+  <!-- Did You Know -->
+  <div style="max-width:700px;margin:28px auto 0;padding:0 20px;">
+    <p style="font-size:0.78rem;color:#aaa;margin-bottom:6px;text-align:center;letter-spacing:0.5px;">DID YOU KNOW</p>
+    <div id="didYouKnow"></div>
+  </div>
+
+  <h2 class="section-title">Browse Parties</h2>
+
+  <div class="cards-grid">
+    <a class="party-card" href="bjp.html">
+      <img src="images/img1.jpg" alt="BJP Logo" />
+      <h3>Bharatiya Janata Party</h3>
+      <p>Founded 1980 · Right-wing · Nationalism</p>
+      <span class="btn-visit">View Profile →</span>
+    </a>
+    <a class="party-card" href="congress.html">
+      <img src="images/img2.jpg" alt="Congress Logo" />
+      <h3>Indian National Congress</h3>
+      <p>Founded 1885 · Centrist · Secularism</p>
+      <span class="btn-visit">View Profile →</span>
+    </a>
+    <a class="party-card" href="aap.html">
+      <img src="images/img3.jpg" alt="AAP Logo" />
+      <h3>Aam Aadmi Party</h3>
+      <p>Founded 2012 · Centrist · Anti-corruption</p>
+      <span class="btn-visit">View Profile →</span>
+    </a>
+    <a class="party-card" href="tmc.html">
+      <img src="images/img4.jpg" alt="TMC Logo" />
+      <h3>All India Trinamool Congress</h3>
+      <p>Founded 1998 · Centre-left · Federalism</p>
+      <span class="btn-visit">View Profile →</span>
+    </a>
+    <div id="noResult">No parties matched your search. Try a different keyword or filter.</div>
+  </div>
+
+  <!-- Party Quiz -->
+  <div class="quiz-section">
+    <h2>🗳 Which Party Aligns with You?</h2>
+    <div id="quizContainer"></div>
+  </div>
+
+  <!-- Chatbot -->
+  <button id="chatToggle" title="Ask about Indian Politics">🤖</button>
+  <div id="chatBox">
+    <div class="chat-header">🇮🇳 IndiaPolity Assistant</div>
+    <div id="chatMessages"></div>
+    <div class="chat-footer">
+      <input id="chatInput" type="text" placeholder="Ask about parties…" />
+      <button id="chatSend">Send</button>
+    </div>
+  </div>
+
+  <button id="topBtn">↑</button>
+
+  <footer>
+    <p>© <span id="footerYear"></span> IndiaPolity · For educational purposes only</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Compare Parties — IndiaPolity</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">🗳 IndiaPolity</a>
+    <div class="nav-right">
+      <button id="menuToggle">☰ Menu</button>
+      <ul class="nav-links" id="navList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bjp.html">BJP</a></li>
+        <li><a href="congress.html">Congress</a></li>
+        <li><a href="aap.html">AAP</a></li>
+        <li><a href="tmc.html">TMC</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-auth-btns" id="navAuthBtns"></div>
+      <button id="darkToggle">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="hero" style="padding:40px 20px 28px;">
+    <h1>Compare Parties</h1>
+    <p>Side-by-side comparison of BJP, Congress, AAP, and TMC with visual charts.</p>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-grid">
+    <div class="chart-box">
+      <h3>📊 Lok Sabha Seats (2024)</h3>
+      <canvas id="seatsChart" height="200"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>🕸 Policy Positioning</h3>
+      <canvas id="radarChart" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="compare-wrapper">
+    <p style="text-align:center;font-size:0.83rem;color:#aaa;margin-bottom:18px;">💡 Click any row to highlight it</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>BJP</th>
+          <th>Congress</th>
+          <th>AAP</th>
+          <th>TMC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Founded</strong></td><td>1980</td><td>1885</td><td>2012</td><td>1998</td></tr>
+        <tr><td><strong>Ideology</strong></td><td>Right-wing, Hindu nationalism</td><td>Centrist, Secularism</td><td>Populist, Anti-corruption</td><td>Centre-left, Federalism</td></tr>
+        <tr><td><strong>Symbol</strong></td><td>Lotus</td><td>Hand</td><td>Broom</td><td>Flowers &amp; Grass</td></tr>
+        <tr><td><strong>Current Leader</strong></td><td>Narendra Modi</td><td>Mallikarjun Kharge</td><td>Arvind Kejriwal</td><td>Mamata Banerjee</td></tr>
+        <tr><td><strong>Primary Base</strong></td><td>Pan-India (North &amp; Central)</td><td>Pan-India</td><td>Delhi &amp; Punjab</td><td>West Bengal</td></tr>
+        <tr><td><strong>Economic Policy</strong></td><td>Market-oriented, Atmanirbhar</td><td>Mixed economy, welfare</td><td>Welfare-based subsidies</td><td>State welfare schemes</td></tr>
+        <tr><td><strong>Stance on CAA</strong></td><td>Strongly supports</td><td>Strongly opposes</td><td>Opposes</td><td>Strongly opposes</td></tr>
+        <tr><td><strong>Religion in Politics</strong></td><td>Central (Hindutva)</td><td>Secular, keeps separate</td><td>Soft Hindutva recently</td><td>Secular, all-inclusive</td></tr>
+        <tr><td><strong>Famous Welfare Scheme</strong></td><td>PM Awas Yojana</td><td>MGNREGA</td><td>Mohalla Clinic</td><td>Kanyashree</td></tr>
+        <tr><td><strong>Lok Sabha Seats (2024)</strong></td><td>240</td><td>99</td><td>3</td><td>29</td></tr>
+        <tr><td><strong>National / Regional</strong></td><td>National</td><td>National</td><td>National (growing)</td><td>Regional</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button id="chatToggle" title="Ask about Indian Politics">🤖</button>
+  <div id="chatBox">
+    <div class="chat-header">🇮🇳 IndiaPolity Assistant</div>
+    <div id="chatMessages"></div>
+    <div class="chat-footer">
+      <input id="chatInput" type="text" placeholder="Ask about parties…" />
+      <button id="chatSend">Send</button>
+    </div>
+  </div>
+
+  <button id="topBtn">↑</button>
+
+  <footer>
+    <p>© <span id="footerYear"></span> IndiaPolity · For educational purposes only</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>News &amp; Updates — IndiaPolity</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">🗳 IndiaPolity</a>
+    <div class="nav-right">
+      <button id="menuToggle">☰ Menu</button>
+      <ul class="nav-links" id="navList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bjp.html">BJP</a></li>
+        <li><a href="congress.html">Congress</a></li>
+        <li><a href="aap.html">AAP</a></li>
+        <li><a href="tmc.html">TMC</a></li>
+        <li><a href="compare.html">Compare</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-auth-btns" id="navAuthBtns"></div>
+      <button id="darkToggle">🌙 Dark</button>
+    </div>
+  </nav>
+
+  <div class="hero" style="padding:40px 20px 24px;">
+    <h1>News &amp; Updates</h1>
+    <p>Latest political developments across parties. Search, filter by party, or browse by category.</p>
+  </div>
+
+  <!-- Live Stats Bar -->
+  <div class="news-stats-bar">
+    <div>Total Articles: <span id="totalCount">12</span></div>
+    <div>Showing: <span id="newsCount">12</span></div>
+    <div>Last Updated: <span>April 2025</span></div>
+  </div>
+
+  <!-- Category Buttons — built by JS -->
+  <div class="news-hero-strip" id="categoryStrip"></div>
+
+  <!-- Search + Party Filter -->
+  <div class="news-search-wrap">
+    <input type="text" id="newsSearch" placeholder="🔍  Search news headlines…" />
+    <select id="newsFilter" style="padding:9px 14px;border:1.5px solid var(--border);border-radius:25px;background:var(--card-bg);color:var(--text);font-size:0.88rem;outline:none;cursor:pointer;">
+      <option value="all">All Parties</option>
+      <option value="bjp">BJP</option>
+      <option value="congress">Congress</option>
+      <option value="aap">AAP</option>
+      <option value="tmc">TMC</option>
+    </select>
+  </div>
+
+  <!-- Sort Controls -->
+  <div style="display:flex;justify-content:center;gap:10px;padding:14px 20px 0;flex-wrap:wrap;">
+    <button class="news-category-btn" id="sortNewest">⬇ Newest First</button>
+    <button class="news-category-btn" id="sortOldest">⬆ Oldest First</button>
+    <button class="news-category-btn" id="clearFilters">✕ Clear Filters</button>
+  </div>
+
+  <!-- News Cards -->
+  <div class="news-grid" id="newsGrid">
+
+    <div class="news-card" data-party="bjp" data-category="infrastructure" data-date="202503">
+      <span class="party-tag news-tag-bjp">BJP</span>
+      <span class="breaking-badge">NEW</span>
+      <h4>PM Modi inaugurates Ganga Expressway in UP</h4>
+      <p class="news-short">The expressway connects multiple districts and is set to boost development in the region.</p>
+      <p class="news-full" style="display:none;">The Ganga Expressway spans over 594 km and is one of India's longest. PM Modi inaugurated it in Shahjahanpur, connecting Meerut to Prayagraj across 12 districts. It is expected to reduce travel time significantly and boost industrial development in the region.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">March 2025</p>
+    </div>
+
+    <div class="news-card" data-party="bjp" data-category="foreign-policy" data-date="202502">
+      <span class="party-tag news-tag-bjp">BJP</span>
+      <h4>India elected to UN Security Council non-permanent seat</h4>
+      <p class="news-short">A diplomatic win under BJP-led foreign policy strengthening India's global position.</p>
+      <p class="news-full" style="display:none;">India secured a non-permanent UNSC seat with overwhelming support. External Affairs Minister Jaishankar called it a vote of confidence in India's foreign policy. India will serve a two-year term starting January 2026, shaping global security discussions.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">February 2025</p>
+    </div>
+
+    <div class="news-card" data-party="bjp" data-category="economy" data-date="202501">
+      <span class="party-tag news-tag-bjp">BJP</span>
+      <h4>Budget 2025 focuses on infrastructure and green energy</h4>
+      <p class="news-short">Finance Minister presents Union Budget with major allocations for roads, railways, and solar energy.</p>
+      <p class="news-full" style="display:none;">Union Budget 2025-26 allocated ₹11.11 lakh crore for capital expenditure — a 16.9% increase. Major highlights include ₹2.78 lakh crore for Railways, a push for rooftop solar under PM Surya Ghar, and revised income tax slabs offering relief to the middle class.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">January 2025</p>
+    </div>
+
+    <div class="news-card" data-party="congress" data-category="politics" data-date="202501">
+      <span class="party-tag news-tag-congress">Congress</span>
+      <h4>Rahul Gandhi launches Bharat Jodo Yatra Phase 2</h4>
+      <p class="news-short">Nationwide outreach aims to connect with youth and marginalised communities ahead of state elections.</p>
+      <p class="news-full" style="display:none;">Bharat Jodo Nyay Yatra covered over 6,700 km across 14 states in 66 days. Rahul Gandhi focused on unemployment, price rise, and the Constitution. The yatra was key to rebuilding Congress ground presence ahead of Delhi and Bihar elections.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">January 2025</p>
+    </div>
+
+    <div class="news-card" data-party="congress" data-category="politics" data-date="202412">
+      <span class="party-tag news-tag-congress">Congress</span>
+      <h4>Congress demands JPC probe on Adani controversy</h4>
+      <p class="news-short">Opposition pushes for a joint parliamentary committee to investigate allegations in the Hindenburg report.</p>
+      <p class="news-full" style="display:none;">Following the Hindenburg Research report's allegations, Congress led a sustained parliamentary demand for a JPC investigation. Rahul Gandhi raised the issue multiple times in Parliament. The Supreme Court separately appointed an expert panel to investigate the matter.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">December 2024</p>
+    </div>
+
+    <div class="news-card" data-party="congress" data-category="policy" data-date="202411">
+      <span class="party-tag news-tag-congress">Congress</span>
+      <h4>Congress unveils new digital outreach strategy for youth</h4>
+      <p class="news-short">Party focuses on social media campaign targeting youth voters for upcoming state elections.</p>
+      <p class="news-full" style="display:none;">The Indian National Congress launched 'Digital Congress' targeting 18-35 year old voters. The initiative involves short video content, Instagram reels, and regional language campaigns to counter BJP's strong digital presence ahead of Delhi and Bihar elections.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">November 2024</p>
+    </div>
+
+    <div class="news-card" data-party="aap" data-category="governance" data-date="202503">
+      <span class="party-tag news-tag-aap">AAP</span>
+      <span class="breaking-badge">NEW</span>
+      <h4>AAP retains Punjab in local body elections</h4>
+      <p class="news-short">Bhagwant Mann continues as Chief Minister as AAP holds Punjab amid strong opposition campaigns.</p>
+      <p class="news-full" style="display:none;">AAP retained key municipal councils in Punjab's local body elections, reinforcing its political grip. The win was attributed to welfare schemes including free electricity, school improvements, and mohalla clinic expansion to Punjab. It also bolstered AAP's position ahead of the 2027 Punjab assembly elections.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">March 2025</p>
+    </div>
+
+    <div class="news-card" data-party="aap" data-category="policy" data-date="202501">
+      <span class="party-tag news-tag-aap">AAP</span>
+      <h4>Kejriwal announces free electricity expansion plan</h4>
+      <p class="news-short">AAP proposes extending its 200-unit free electricity scheme nationally if voted to power.</p>
+      <p class="news-full" style="display:none;">Arvind Kejriwal announced AAP would expand its free electricity scheme (up to 200 units/month) nationally if given the opportunity to govern. The scheme has benefited over 5 million households in Delhi since 2019 and is now being replicated as a model in Punjab.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">January 2025</p>
+    </div>
+
+    <div class="news-card" data-party="aap" data-category="governance" data-date="202410">
+      <span class="party-tag news-tag-aap">AAP</span>
+      <h4>Delhi Mohalla Clinics reach 1,000 operational milestone</h4>
+      <p class="news-short">AAP's flagship healthcare model crosses major milestone, providing free consultations to millions.</p>
+      <p class="news-full" style="display:none;">Delhi's Mohalla Clinic network crossed 1,000 operational clinics providing free OPD consultations, medicines, and diagnostic tests. The model has been lauded by WHO. Each clinic serves ~100 patients daily; AAP claims over 10 crore consultations since launch.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">October 2024</p>
+    </div>
+
+    <div class="news-card" data-party="tmc" data-category="politics" data-date="202502">
+      <span class="party-tag news-tag-tmc">TMC</span>
+      <h4>Mamata Banerjee addresses national opposition meet</h4>
+      <p class="news-short">TMC chief calls for united front ahead of 2026 West Bengal assembly elections.</p>
+      <p class="news-full" style="display:none;">Mamata Banerjee addressed a joint opposition meeting in New Delhi, pushing for greater coordination among non-BJP parties. She stressed protecting state autonomy and resisting central government overreach. TMC plays a pivotal role in the INDIA bloc while maintaining independent stances on CAA and NRC.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">February 2025</p>
+    </div>
+
+    <div class="news-card" data-party="tmc" data-category="policy" data-date="202411">
+      <span class="party-tag news-tag-tmc">TMC</span>
+      <h4>Lakshmir Bhandar scheme extended to new beneficiaries</h4>
+      <p class="news-short">West Bengal expands monthly cash support scheme to include more women from rural areas.</p>
+      <p class="news-full" style="display:none;">The Lakshmir Bhandar scheme was extended to include more rural women. It provides ₹1,000/month to general category and ₹1,200/month to SC/ST women. Over 2.1 crore women are now enrolled, making it one of the largest direct-benefit transfer schemes at the state level in India.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">November 2024</p>
+    </div>
+
+    <div class="news-card" data-party="tmc" data-category="governance" data-date="202410">
+      <span class="party-tag news-tag-tmc">TMC</span>
+      <h4>Bengal launches Duare Sarkar Phase 5</h4>
+      <p class="news-short">State doorstep delivery programme sees massive enrolment across West Bengal districts.</p>
+      <p class="news-full" style="display:none;">Phase 5 of Duare Sarkar ('Government at Doorstep') was launched across West Bengal, providing access to 30+ government schemes at local camps. Over 7.5 crore applications were processed in previous phases, covering Swasthya Sathi, Krishak Bandhu, and student scholarships.</p>
+      <a class="read-more" href="#">Read more ▾</a>
+      <p class="date">October 2024</p>
+    </div>
+
+  </div>
+
+  <div id="noNewsResult" style="display:none;text-align:center;padding:40px 20px;color:var(--muted);font-size:0.95rem;">
+    😕 No articles found. Try a different keyword or filter.
+  </div>
+
+  <button id="chatToggle" title="Ask about Indian Politics">🤖</button>
+  <div id="chatBox">
+    <div class="chat-header">🇮🇳 IndiaPolity Assistant</div>
+    <div id="chatMessages"></div>
+    <div class="chat-footer">
+      <input id="chatInput" type="text" placeholder="Ask about news…" />
+      <button id="chatSend">Send</button>
+    </div>
+  </div>
+
+  <button id="topBtn">↑</button>
+
+  <footer>
+    <p>© <span id="footerYear"></span> IndiaPolity · For educational purposes only</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  (function () {
+    /* ── Build category buttons via DOM loop ── */
+    var categories = [
+      { val: "all",           label: "🗂 All" },
+      { val: "politics",      label: "🏛 Politics" },
+      { val: "governance",    label: "⚙ Governance" },
+      { val: "economy",       label: "📈 Economy" },
+      { val: "infrastructure",label: "🏗 Infrastructure" },
+      { val: "foreign-policy",label: "🌐 Foreign Policy" },
+      { val: "policy",        label: "📋 Policy" }
+    ];
+    var strip = document.getElementById("categoryStrip");
+    var activeCat = "all";
+
+    for (var ci = 0; ci < categories.length; ci++) {
+      (function (cat) {
+        var btn = document.createElement("button");
+        btn.className = "news-category-btn" + (cat.val === "all" ? " active-cat" : "");
+        btn.textContent = cat.label;
+        btn.setAttribute("data-cat", cat.val);
+        btn.addEventListener("click", function () {
+          activeCat = cat.val;
+          var allBtns = document.querySelectorAll(".news-category-btn[data-cat]");
+          for (var bi = 0; bi < allBtns.length; bi++) allBtns[bi].classList.remove("active-cat");
+          btn.classList.add("active-cat");
+          applyFilters();
+        });
+        strip.appendChild(btn);
+      })(categories[ci]);
+    }
+
+    /* ── Master filter ── */
+    var allCards = Array.prototype.slice.call(document.querySelectorAll(".news-card"));
+
+    function applyFilters() {
+      var partyVal   = document.getElementById("newsFilter").value.toLowerCase();
+      var searchVal  = document.getElementById("newsSearch").value.toLowerCase().trim();
+      var visible    = 0;
+
+      for (var i = 0; i < allCards.length; i++) {
+        var card    = allCards[i];
+        var party   = (card.getAttribute("data-party") || "").toLowerCase();
+        var cat     = (card.getAttribute("data-category") || "").toLowerCase();
+        var h4text  = card.querySelector("h4") ? card.querySelector("h4").getAttribute("data-raw") || card.querySelector("h4").textContent.toLowerCase() : "";
+        var ptext   = card.querySelector(".news-short") ? card.querySelector(".news-short").textContent.toLowerCase() : "";
+
+        var matchParty  = partyVal === "all"  || party === partyVal;
+        var matchCat    = activeCat === "all" || cat === activeCat;
+        var matchSearch = searchVal === ""    || h4text.indexOf(searchVal) !== -1 || ptext.indexOf(searchVal) !== -1;
+
+        var show = matchParty && matchCat && matchSearch;
+        card.style.display = show ? "" : "none";
+        if (show) visible++;
+      }
+      var countEl = document.getElementById("newsCount");
+      if (countEl) countEl.textContent = visible;
+      var noRes = document.getElementById("noNewsResult");
+      if (noRes) noRes.style.display = visible === 0 ? "block" : "none";
+    }
+
+    document.getElementById("newsFilter").addEventListener("change", applyFilters);
+    document.getElementById("newsSearch").addEventListener("input", function () {
+      applyFilters();
+      /* Highlight in headings */
+      var q = this.value.trim();
+      for (var i = 0; i < allCards.length; i++) {
+        var h4 = allCards[i].querySelector("h4");
+        if (!h4) continue;
+        if (!h4.getAttribute("data-raw")) h4.setAttribute("data-raw", h4.textContent);
+        var raw = h4.getAttribute("data-raw");
+        if (!q) { h4.textContent = raw; continue; }
+        var regex = new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+        h4.innerHTML = raw.replace(regex, '<mark style="background:#ffe082;border-radius:3px;padding:0 2px;">$1</mark>');
+      }
+    });
+
+    /* ── Sort ── */
+    document.getElementById("sortNewest").addEventListener("click", function () {
+      var grid = document.getElementById("newsGrid");
+      var sorted = allCards.slice().sort(function (a, b) {
+        return parseInt(b.getAttribute("data-date")) - parseInt(a.getAttribute("data-date"));
+      });
+      for (var i = 0; i < sorted.length; i++) grid.appendChild(sorted[i]);
+      window.IndiaPolityToast && window.IndiaPolityToast.show("Sorted: Newest first", "info", 1800);
+    });
+
+    document.getElementById("sortOldest").addEventListener("click", function () {
+      var grid = document.getElementById("newsGrid");
+      var sorted = allCards.slice().sort(function (a, b) {
+        return parseInt(a.getAttribute("data-date")) - parseInt(b.getAttribute("data-date"));
+      });
+      for (var i = 0; i < sorted.length; i++) grid.appendChild(sorted[i]);
+      window.IndiaPolityToast && window.IndiaPolityToast.show("Sorted: Oldest first", "info", 1800);
+    });
+
+    document.getElementById("clearFilters").addEventListener("click", function () {
+      document.getElementById("newsFilter").value = "all";
+      document.getElementById("newsSearch").value = "";
+      activeCat = "all";
+      var allBtns = document.querySelectorAll(".news-category-btn[data-cat]");
+      for (var i = 0; i < allBtns.length; i++) {
+        allBtns[i].classList.toggle("active-cat", allBtns[i].getAttribute("data-cat") === "all");
+      }
+      /* Remove highlights */
+      for (var j = 0; j < allCards.length; j++) {
+        var h4 = allCards[j].querySelector("h4");
+        if (h4 && h4.getAttribute("data-raw")) h4.textContent = h4.getAttribute("data-raw");
+      }
+      applyFilters();
+      window.IndiaPolityToast && window.IndiaPolityToast.show("Filters cleared", "success", 1800);
+    });
+
+    /* ── Read more expand/collapse ── */
+    document.getElementById("newsGrid").addEventListener("click", function (e) {
+      var btn = e.target.closest(".read-more");
+      if (!btn) return;
+      e.preventDefault();
+      var card    = btn.closest(".news-card");
+      var shortEl = card.querySelector(".news-short");
+      var fullEl  = card.querySelector(".news-full");
+      if (!fullEl) return;
+      var isExpanded = fullEl.style.display !== "none";
+      fullEl.style.display  = isExpanded ? "none"  : "block";
+      shortEl.style.display = isExpanded ? "block" : "none";
+      btn.textContent = isExpanded ? "Read more ▾" : "Read less ▴";
+    });
+
+  })();
+  </script>
+</body>
+</html>
